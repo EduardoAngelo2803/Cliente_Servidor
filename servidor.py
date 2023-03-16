@@ -1,7 +1,7 @@
 import socket
 
 HOST = 'localhost'
-PORT = 5000
+PORT = 8082
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sok:
 
@@ -12,6 +12,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sok:
     with conn:
 
         while True:
+            print ("Waiting to receive message from client")
 
             data = conn.recv(1024)
 
