@@ -1,27 +1,42 @@
 import socket
+import time
 
-HOST = 'localhost'
-PORT = 8082
+def calculate_checksum(data):
+    return sum(data) % 256
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sok:
+def is_corrupted(recv_data, checksum):
+    return calculate_checksum(recv_data) != checksum
 
-    sok.bind((HOST, PORT))
-    sok.listen()
-    conn, adr = sok.accept()
+def main():
+    server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    server.bind(('localhost', 12345))
 
-    with conn:
+    print("RATAALADA ONLINE")
 
-        while True:
-            print ("Waiting to receive message from client")
+    expected_seq_num = 0
 
-            data = conn.recv(1024)
+    while True:
+        data, addr = server.recvfrom(1024)
+        split_data = data.decode('utf-8').split('|')
 
-            if not data:
-                break
-        
+        if len(split_data) != 3:
+            print("[!] INVALID MESSAGE:", data)
+            continue
 
-            conn.sendall(b'ACK')
-            conn.sendall(b'Error!')
+        seq_num, msg, checksum = split_data
 
+        if is_corrupted((str(seq_num) + '|' + msg).encode('utf-8'), int(checksum)):
+            response = f"NACK|{seq_num}"
+        else:
+            if int(seq_num) == expected_seq_num:
+                
+                print(f"{addr[0]}:{addr[1]} >> {msg}")
+                expected_seq_num = 1 - expected_seq_num
 
-    
+            response = f"ACK|{seq_num}"
+
+        time.sleep(0.1)  # Adicione um atraso na resposta do servidor
+        server.sendto(response.encode('utf-8'), addr)
+
+if __name__ == "__main__":
+    main()
