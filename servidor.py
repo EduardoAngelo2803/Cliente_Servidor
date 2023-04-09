@@ -1,6 +1,6 @@
 import socket
 import time
-from repo.Cliente_Servidor.utils.checksum_utils import is_corrupted
+from utils.checksum_utils import is_corrupted
 
 SERVER_DELAY = 0.4
 

@@ -1,5 +1,5 @@
 import socket
-from repo.Cliente_Servidor.utils.msg_utils import define_msg_batch, define_msg_single, resend_msg
+from utils.msg_utils import define_msg_batch, define_msg_single, resend_msg
 
 DEFAULT_TIMEOUT = 1
 MAX_RETRIES = 3

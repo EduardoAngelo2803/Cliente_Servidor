@@ -1,4 +1,4 @@
-from repo.Cliente_Servidor.utils.checksum_utils import calculate_checksum
+from utils.checksum_utils import calculate_checksum
 
 
 def build_msg(id, data, checksum):
