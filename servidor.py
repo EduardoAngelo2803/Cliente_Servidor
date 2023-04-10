@@ -3,8 +3,6 @@ import time
 from utils.checksum_utils import is_corrupted
 
 SERVER_DELAY = 0.4
-IS_SINGLE = 0
-
 
 def connect():
     server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -16,7 +14,7 @@ def single(server):
     while True:
         data, addr = server.recvfrom(1024)
         split_data = data.decode('utf-8').split('|')
-
+        
         if len(split_data) != 3:
             print("[!] INVALID MESSAGE:", data)
             continue

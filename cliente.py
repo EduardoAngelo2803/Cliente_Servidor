@@ -26,8 +26,9 @@ def single(client):
     seq_num = 0
 
     original_message = ''
+    counter = 0
     while True:
-        original_message = 'message'
+        original_message = f'message_{counter}'
 
         retries = 0
         while retries < MAX_RETRIES:
@@ -49,10 +50,19 @@ def single(client):
                     retries += 1
             except socket.timeout:
                 print("[!] Timeout - Resending message")
+                client.settimeout(timeout*10)
+                try:
+                    response, _ = client.recvfrom(1024)
+                    response = response.decode('utf-8').split('|')
+                except:
+                    print('[!] Connection was lost')
+                    exit()
                 retries += 1
 
         if retries == MAX_RETRIES:
             print("[!] Maximum tries reached. Please try again.")
+        else:
+            counter += 1
 
 
 def batch(client):
