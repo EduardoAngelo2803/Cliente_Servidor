@@ -23,11 +23,10 @@ def define_msg_single(seq_num, original_message, is_corrupt):
     return message
 
 
-def resend_msg(message, index, client):
+def resend_msg(message, corrupt_index, client):
     message = define_msg_batch(message, 'n')
-    for msg in message[index:]:
-        client.sendto(msg.encode('utf-8'), ('localhost', 12345))
-    for msg in message[index:]: # receives all the messages 
-        response, _ = client.recvfrom(1024)
-        response = response.decode('utf-8').split('|')
+    message = '&'.join(message[corrupt_index:])
+    client.sendto(message.encode('utf-8'), ('localhost', 12345))
+    response, _ = client.recvfrom(1024)
+    response = response.decode('utf-8').split('|')
     return response
