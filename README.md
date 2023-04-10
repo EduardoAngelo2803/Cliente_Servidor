@@ -29,10 +29,12 @@ python3 servidor.py
 ```
 python3 cliente.py
 ```
-5. Após isto, haverá a conexão entre o cliente com o servidor e os envios de mensagens (tanto simples como em pacotes) poderão ser realizados, bem como a devida simulação de perda ou corrupção, bem como a solução:
+5. Após isto, haverá a conexão entre o cliente com o servidor e os envios de mensagens (tanto simples como em pacotes) poderão ser realizados, bem como a devida simulação de perda ou corrupção, bem como a solução.
 
+## Comportamento:
+### Single
 Quando em batch, o cliente envia pacotes de tamanho fixo. O servidor confirmará o recebimento de cada pacote e enviará um ACK (acknowledgment) ou um NACK (negative acknowledgment) para o cliente. Se um determinado pacote chegar corrompido, o servidor enviará um NACK e o cliente reenviará o pacote corrompido da sequencia.
 Se um ACK ou NACK for perdido, o cliente reenviará o pacote. O cliente só enviará o próximo pacote quando receber um ACK do servidor.
-
+### Batch
 Quando em single, o cliente enviará uma única mensagem por vez ao servidor e aguardará o recebimento do ACK correspondente antes de enviar a próxima mensagem. Caso o ACK correspondente não seja recebido, o cliente reenviará a mensagem original, após um timeout. Se a mensagem original for corrompida, o servidor enviará um NACK e o cliente reenviará a mensagem original. 
 O cliente só enviará a próxima mensagem após receber o ACK correspondente do servidor para a mensagem anterior até o máximo de 3 tentativas.
