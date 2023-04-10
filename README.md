@@ -38,3 +38,12 @@ Se um ACK ou NACK for perdido, o cliente reenviará o pacote. O cliente só envi
 ### Batch
 Quando em single, o cliente enviará uma única mensagem por vez ao servidor e aguardará o recebimento do ACK correspondente antes de enviar a próxima mensagem. Caso o ACK correspondente não seja recebido, o cliente reenviará a mensagem original, após um timeout. Se a mensagem original for corrompida, o servidor enviará um NACK e o cliente reenviará a mensagem original. 
 O cliente só enviará a próxima mensagem após receber o ACK correspondente do servidor para a mensagem anterior até o máximo de 3 tentativas.
+
+## Prints
+### Single
+![image](https://user-images.githubusercontent.com/88664949/230997186-8c8692e8-f8b2-420f-b21a-c0f378eddbe4.png)
+### Batch
+![image](https://user-images.githubusercontent.com/88664949/230997840-cdcdfd4f-449a-45f4-bf48-d834daade53d.png)
+
+> **Observação:** Ainda falta colocar a imagem do timeout, verificando sua implementação.
+
