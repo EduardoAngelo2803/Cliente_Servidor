@@ -1,9 +1,9 @@
 # Cliente_Servidor
 
-Este projeto foi desenvolvido por estudantes da Cesar school, da disciplina de Infraestrutura de Comunicação, ministrada pelo prof Dr. Petrônio.
+Este projeto foi desenvolvido por estudantes da Cesar School, da disciplina de Infraestrutura de Comunicação, ministrada pelo prof Dr. Petrônio.
 Tem como finalidade, desenvolver uma aplicação cliente-servidor capaz de, na camada de aplicação, fornecer uma comunicação que tenha todas as caracteristicas do transporte confiável para os dados trocados entre os sistemas finais, considerando um canal com perda de dados e erros.
 
-Para isto, implementamos um protocolo baseano num protocolo de transferência confiável paralela, utilizando Python e sockets UDP. O objetivo é fornecer uma simulação de perda/corrupção e uma solução simples para transmitir dados confiáveis em uma rede, onde os pacotes podem ser perdidos ou corrompidos.
+Para isto, implementamos um protocolo baseado num protocolo de transferência confiável paralela, utilizando Python e sockets UDP. O objetivo é fornecer uma simulação de perda/corrupção e uma solução simples para transmitir dados confiáveis em uma rede, onde os pacotes podem ser perdidos ou corrompidos.
 
 ## Arquivos
 O projeto é composto pelos seguintes arquivos:
@@ -32,18 +32,19 @@ python3 cliente.py
 5. Após isto, haverá a conexão entre o cliente com o servidor e os envios de mensagens (tanto _single_ como em _batch_) poderão ser realizados, bem como a devida simulação de perda ou corrupção, conforme as instruções no terminal.
 
 ## Comportamento:
-### Single
-Quando em batch, o cliente envia pacotes de tamanho fixo. O servidor confirmará o recebimento de cada pacote e enviará um ACK (acknowledgment) ou um NACK (negative acknowledgment) para o cliente. Se um determinado pacote chegar corrompido, o servidor enviará um NACK e o cliente reenviará o pacote corrompido da sequencia.
-Se um ACK ou NACK for perdido, o cliente reenviará o pacote. O cliente só enviará o próximo pacote quando receber um ACK do servidor.
 ### Batch
+Quando em batch, o cliente envia pacotes de tamanho fixo. O servidor confirmará o um ACK (acknowledgment) para o cliente, referindo-se à ultima mensagem que o servidor leu corretamente. Caso o problema esteja na primeira mensagem, um ACK 0 será retornado. Dessa forma, o cliente reenviará as mensagens a partir do número de sequência onde o erro ocorreu.
+
+### Single
 Quando em single, o cliente enviará uma única mensagem por vez ao servidor e aguardará o recebimento do ACK correspondente antes de enviar a próxima mensagem. Caso o ACK correspondente não seja recebido, o cliente reenviará a mensagem original, após um timeout. Se a mensagem original for corrompida, o servidor enviará um NACK e o cliente reenviará a mensagem original. 
 O cliente só enviará a próxima mensagem após receber o ACK correspondente do servidor para a mensagem anterior até o máximo de 3 tentativas.
 
 ## Prints
 ### Single
-![image](https://user-images.githubusercontent.com/88664949/230997186-8c8692e8-f8b2-420f-b21a-c0f378eddbe4.png)
+COLOCAR PRINT!!!
+
 ### Batch
-![image](https://user-images.githubusercontent.com/88664949/230997840-cdcdfd4f-449a-45f4-bf48-d834daade53d.png)
+COLOCAR PRINT!!!
 
 > **Observação:** Ainda falta colocar a imagem do timeout, verificando sua implementação.
 
