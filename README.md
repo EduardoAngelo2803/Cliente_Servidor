@@ -29,7 +29,7 @@ python3 servidor.py
 ```
 python3 cliente.py
 ```
-5. Após isto, haverá a conexão entre o cliente com o servidor e os envios de mensagens (tanto simples como em pacotes) poderão ser realizados, bem como a devida simulação de perda ou corrupção, bem como a solução.
+5. Após isto, haverá a conexão entre o cliente com o servidor e os envios de mensagens (tanto _single_ como em _batch_) poderão ser realizados, bem como a devida simulação de perda ou corrupção, conforme as instruções no terminal.
 
 ## Comportamento:
 ### Single
