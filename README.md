@@ -33,16 +33,21 @@ python3 cliente.py
 
 ## Comportamento:
 ### Batch
-Quando em batch, o cliente envia pacotes de tamanho fixo. O servidor confirmará o um ACK (acknowledgment) para o cliente, referindo-se à ultima mensagem que o servidor leu corretamente. Caso o problema esteja na primeira mensagem, um ACK 0 será retornado. Dessa forma, o cliente reenviará as mensagens a partir do número de sequência onde o erro ocorreu.
+Quando em batch, o cliente envia pacotes de tamanho fixo. O servidor confirmará com um NACK (acknowledgment) para o cliente, referindo-se a mensagem corrupta/perdida que o servidor (não) recebeu. Caso o problema esteja na primeira mensagem, um NACK 0 será retornado. Dessa forma, o cliente reenviará as mensagens a partir do número de sequência onde o erro ocorreu. Se tudo for enviado e lido corretamente, o servidor enviará um ACK.
 
 ### Single
 Quando em single, o cliente enviará uma única mensagem por vez ao servidor e aguardará o recebimento do ACK correspondente antes de enviar a próxima mensagem. Caso o ACK correspondente não seja recebido, o cliente reenviará a mensagem original, após um timeout. Se a mensagem original for corrompida, o servidor enviará um NACK e o cliente reenviará a mensagem original. 
 O cliente só enviará a próxima mensagem após receber o ACK correspondente do servidor para a mensagem anterior até o máximo de 3 tentativas.
+
+### Individual Confirmation Batch
+Quando em Individual Confirmation Batch o cliente enviará um lote de mensagens que serão enviadas de uma vez ao servidor e aguarda o recebimento do ACK correspondente de CADA uma das mensagem do lote. Caso algum NACK seja recebido, o cliente reenviará as mensagens a partir do número de sequência onde o erro ocorreu. Ou seja, o cliente envia um só lote em diferentes mensagens. 
 
 ## Prints
 ### Single
 ![image](https://user-images.githubusercontent.com/88664949/231024164-2c986738-8d0b-4c1d-8ae4-0288d482cd57.png)
 ### Batch
 ![image](https://user-images.githubusercontent.com/88664949/231024652-0a8f6abe-1cfe-4722-a2f4-1b3fecf42482.png)
-> **Observação:** 
+### Individual Confirmation Batch
+
+> **Observação:** Falta add print do Individual Confirmation Batch
 
