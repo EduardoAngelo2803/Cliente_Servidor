@@ -41,10 +41,8 @@ O cliente só enviará a próxima mensagem após receber o ACK correspondente do
 
 ## Prints
 ### Single
-COLOCAR PRINT!!!
-
+![image](https://user-images.githubusercontent.com/88664949/231024164-2c986738-8d0b-4c1d-8ae4-0288d482cd57.png)
 ### Batch
-COLOCAR PRINT!!!
-
-> **Observação:** Ainda falta colocar a imagem do timeout, verificando sua implementação.
+![image](https://user-images.githubusercontent.com/88664949/231024652-0a8f6abe-1cfe-4722-a2f4-1b3fecf42482.png)
+> **Observação:** 
 
