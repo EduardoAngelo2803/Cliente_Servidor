@@ -30,3 +30,14 @@ def resend_msg(message, corrupt_index, client):
     response, _ = client.recvfrom(1024)
     response = response.decode('utf-8').split('|')
     return response
+
+
+def resend_msg_individual_batch(message, index, client):
+    message = define_msg_batch(message, 'n')
+    for msg in message[index:]:
+        client.sendto(msg.encode('utf-8'), ('localhost', 12345))
+    for msg in message[index:]: # receives all the messages 
+        response, _ = client.recvfrom(1024)
+        response = response.decode('utf-8').split('|')
+        print(f'{response[0]} {response[1]}')
+    return response

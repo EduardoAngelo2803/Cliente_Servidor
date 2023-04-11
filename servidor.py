@@ -45,6 +45,7 @@ def batch(server):
                 seq_num = int(seq_num) + 1
                 response = f"ACK|{str(seq_num)}"
             else:
+                response = f'NACK|{str(seq_num)}'
                 break
         if response == '':
             response = 'ACK|0'
