@@ -5,6 +5,15 @@ DEFAULT_TIMEOUT = 1
 MAX_RETRIES = 3
 
 
+def check_close(client):
+    close = input('Close? (y/n) >> ')
+    if close == 'y':
+        print('>> DISCONNECTED FROM RATAALADA <<')
+        client.close()
+        exit()
+
+
+
 def define_comm(is_batch = False):
     if is_batch == False:
         corrupt = input('Corrupt? (y/n) >> ')
@@ -29,6 +38,8 @@ def single(client):
     counter = 0
     while True:
         original_message = f'message_{counter}'
+        check_close(client)
+
 
         retries = 0
         while retries < MAX_RETRIES:
@@ -68,6 +79,8 @@ def single(client):
 def batch(client):
     while True:
         original_message = ['msg0', 'msg1', 'msg2', 'msg3', 'msg4']
+        check_close(client)
+
 
         retries = 0
         successful = False
@@ -105,6 +118,7 @@ def batch(client):
 def individual_batch(client):
     while True:
         original_message = ['msg0', 'msg1', 'msg2', 'msg3', 'msg4']
+        check_close(client)
 
         retries = 0
         successful = False
